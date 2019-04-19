@@ -33,6 +33,7 @@ class DoublyLinkedList{
 
       }else{
         newNode->next = this->head;
+        this->head->prev = newNode;
         this->head = newNode;
         this->size++;
       }
@@ -96,10 +97,9 @@ class DoublyLinkedList{
      */
     void pop_back(){
 
-      Node2<T>* tem;
+      Node2<T>* tem, *prev;
 
       if(this->size == 1){
-
         tem = this->head;
         this->head = nullptr;
         this->tail = nullptr;
@@ -108,10 +108,12 @@ class DoublyLinkedList{
 
         return;
       }else{
+        std::cout<<"Entre aqui"<<this->tail->prev->data;
 
         tem = this->tail;
-        this->tail = this->tail->prev;
-        this->tail->next = nullptr;
+        prev = tem->prev;
+        this->tail = prev;
+        prev->next = nullptr;
         this->size--;
         delete tem;
 
@@ -216,7 +218,7 @@ class DoublyLinkedList{
         curr = this->head;
 
         while(curr != this->tail && curr != it){
-          curr = curr.next;
+          curr = curr->next;
         }
 
         if(curr == it){
@@ -248,28 +250,38 @@ class DoublyLinkedList{
 
       while(curr != nullptr){
 
+        if(curr->data == value)
+        {
+            if(this->size == 1)
+            {
 
-        if(curr->data == value){
-          if(this->size == 1){
-
-            tem = this->head;
-            this->tail = nullptr;
-            this->head = nullptr;
-            this->size--;
-            curr = curr->next;
-            delete tem;
-
-          }else if(curr == this->tail){
-            if(this->size == 2){
-
-              tem = this->tail;
-              this->tail = this->head;
-              this->head->next = nullptr;
+              tem = this->head;
+              this->tail = nullptr;
+              this->head = nullptr;
               this->size--;
               curr = curr->next;
               delete tem;
 
-            }
+            }else if(curr == this->tail)
+            {
+              if(this->size == 2){
+
+                tem = this->tail;
+                this->tail = this->head;
+                this->head->next = nullptr;
+                this->size--;
+                curr = curr->next;
+                delete tem;
+
+              }else{
+
+                tem = this->tail;
+                this->tail = tem->prev;
+                this->tail->next = nullptr;
+                this->size--;
+                curr = curr->next;
+                delete tem;
+              }
           }else{
 
             if(curr == this->head){
@@ -298,6 +310,68 @@ class DoublyLinkedList{
       }
 
     }
+
+    /**
+     * @brief erase
+     * @param it
+     * @return
+     */
+    Node2<T>* erase(Node2<T>* it){
+
+      Node2<T>* tem;
+      Node2<T>* curr = this->head;
+      Node2<T>* prev;
+
+      if(it == this->head){
+
+        if(this->size > 1){
+
+            tem = it;
+            this->head = it->next;
+            this->head->prev = nullptr;
+            this->size--;
+            delete tem;
+            return this->head;
+          }
+
+          tem = it;
+          this->head = nullptr;
+          this->tail = nullptr;
+          this->size--;
+          delete tem;
+          return nullptr;
+
+        }else{
+
+          while(curr != it && curr != nullptr){
+            curr = curr->next;
+          }
+
+          if(curr == it){
+            if(it == this->tail){
+
+              tem = this->tail;
+              this->tail = tem->prev;
+              this->tail->next = nullptr;
+              this->size--;
+              delete tem;
+              return this->tail;
+
+            }
+
+            tem = curr;
+            curr->prev->next = curr->next;
+            curr->next->prev = curr->prev;
+            this->size--;
+            delete tem;
+            return curr->prev->next;
+
+          }
+
+          return nullptr;
+
+      }
+  }
 
     //constructors
     /**

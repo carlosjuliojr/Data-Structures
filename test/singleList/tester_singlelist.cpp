@@ -309,9 +309,10 @@ TEST(test9, test_erase)
       // 2  => null
       // ^
 
-//      itReturn = myList->erase(itReturn);
+      itReturn = myList->erase(itReturn);
 
 
+      ASSERT_EQ(itReturn,nullptr);
 
       delete myList;
 
