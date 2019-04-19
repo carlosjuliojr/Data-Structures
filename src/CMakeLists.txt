@@ -17,9 +17,13 @@ project(directory_test)
 set(library_sources
    CMakeLists.txt
    node.h
+   node2.h
+   node2.cpp
    singlelinkedlist.h
    node.cpp
    singlelinkedlist.cpp
+   doublylinkedlist.h
+   doublylinkedlist.cpp
   )
 
 add_library(datelib ${library_sources})
