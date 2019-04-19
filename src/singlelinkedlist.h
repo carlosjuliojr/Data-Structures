@@ -299,6 +299,66 @@ class SingleLinkedList {
 
     }
 
+    /**
+     * @brief erase
+     * @param it
+     * @return
+     */
+    Node<T>* erase(Node<T>* it){
+
+      Node<T>* tem;
+      Node<T>* curr = this->head;
+      Node<T>* prev;
+
+      if(it == this->head){
+
+        if(this->size > 1){
+
+            tem = it;
+            this->head = it->next;
+            this->size--;
+            delete tem;
+            return this->head;
+          }
+
+          tem = it;
+          this->head = nullptr;
+          this->tail = nullptr;
+          this->size--;
+          delete tem;
+          return nullptr;
+
+        }else{
+
+          while(curr != it && curr != nullptr){
+            prev = curr;
+            curr = curr->next;
+          }
+
+          if(curr == it){
+            if(it == tail){
+              tem = this->tail;
+              this->tail = prev;
+              prev->next = nullptr;
+              this->size--;
+              delete tem;
+              return prev;
+
+            }
+
+            tem = curr;
+            prev->next = curr->next;
+            this->size--;
+            delete tem;
+            return prev->next;
+
+          }
+
+          return nullptr;
+
+      }
+  }
+
     //getter and setters
 
     Node<T>* getTail() const

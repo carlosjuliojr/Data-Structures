@@ -7,23 +7,21 @@
 # @date 15/10/2016
 ###############################################################################
 
+cmake_minimum_required(VERSION 3.5)
 
-cmake_minimum_required(VERSION 2.8.9)
-project(directory_test)
+set(PROJECT_NAME tester_doublylist)
 
-#Bring the headers, such as Student.h into the project
+set(PROJECT_SRC
+    tester_doublylist.cpp
+    main.cpp
+    )
 
-include_directories(../src)
+add_executable(${PROJECT_NAME} ${PROJECT_SRC})
 
-add_subdirectory(singleList)
-add_subdirectory(doublyList)
+include_directories(
+    ../src
+    )
 
-#Can manually add the sources using the set command as follows:
-set(SOURCES  main.cpp)
+target_link_libraries(${PROJECT_NAME} gtest)
 
-#However, the file(GLOB...) allows for wildcard additions:
-#file(GLOB SOURCES "src/*.cpp")
 
-add_executable(testings ${SOURCES})
-
-target_link_libraries(testings datelib)

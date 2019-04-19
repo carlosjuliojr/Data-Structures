@@ -157,6 +157,147 @@ class DoublyLinkedList{
           return false;
     }
 
+    /**
+     * @brief begin
+     * @return
+     */
+    Node2<T>* begin(){
+      return this->head;
+    }
+
+    /**
+     * @brief end
+     * @return
+     */
+    Node2<T>* end(){
+      return this->tail;
+    }
+
+    /**
+     * @brief insert
+     * @param value
+     */
+    void insert(T value){
+      this->push_front(value);
+    }
+
+    /**
+     * @brief insert
+     * @param it
+     * @param value
+     */
+    void insert(Node2<T>* it,const T& value){
+
+      Node2<T>* tem,*curr, *prev;
+      Node2<T>* newNode = new Node2<T>(value);
+
+      if(this->head == it){
+
+        tem = this->head;
+        this->head = newNode;
+        this->head->next = tem;
+        tem->prev = this->head;
+        this->size++;
+        return;
+
+      }else if(this->tail == it){
+
+        prev = this->tail->prev;
+        prev->next = newNode;
+        newNode->prev = prev;
+        newNode->next = this->tail;
+        this->tail->prev = newNode;
+        this->size++;
+        return;
+
+
+      }else{
+
+        curr = this->head;
+
+        while(curr != this->tail && curr != it){
+          curr = curr.next;
+        }
+
+        if(curr == it){
+
+          prev = curr->prev;
+          prev->next = newNode;
+          newNode->prev = prev;
+          newNode->next = curr;
+          curr->prev = newNode;
+          this->size++;
+          return;
+        }
+        return;
+      }
+
+
+      return;
+    }
+
+    /**
+     * @brief remove
+     * @param value
+     */
+    void remove(const T& value){
+
+      Node2<T>* curr = this->head;
+      Node2<T>* tem;
+
+
+      while(curr != nullptr){
+
+
+        if(curr->data == value){
+          if(this->size == 1){
+
+            tem = this->head;
+            this->tail = nullptr;
+            this->head = nullptr;
+            this->size--;
+            curr = curr->next;
+            delete tem;
+
+          }else if(curr == this->tail){
+            if(this->size == 2){
+
+              tem = this->tail;
+              this->tail = this->head;
+              this->head->next = nullptr;
+              this->size--;
+              curr = curr->next;
+              delete tem;
+
+            }
+          }else{
+
+            if(curr == this->head){
+              tem = curr;
+              curr = curr->next;
+              this->head = curr;
+              this->head->prev = nullptr;
+              this->size--;
+              delete tem;
+            }else{
+              tem = curr;
+              curr = curr->next;
+              tem->prev->next = curr;
+              this->size--;
+              delete tem;
+            }
+          }
+
+
+        }else{
+          curr = curr->next;
+
+        }
+
+
+      }
+
+    }
 
     //constructors
     /**

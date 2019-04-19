@@ -260,62 +260,62 @@ TEST(test8, test_insert)
 }
 
 
-//TEST(test9, test_erase)
-//{
+TEST(test9, test_erase)
+{
 
-//   SingleList<int>* myList = new SingleList<int>;
+   SingleLinkedList<int>* myList = new SingleLinkedList<int>;
 
-//      myList->push_front(4);
-//      myList->push_front(3);
-//      myList->push_front(2);
-//      myList->push_front(1);
+      myList->push_front(4);
+      myList->push_front(3);
+      myList->push_front(2);
+      myList->push_front(1);
 
-//      // 1  => 2  => 3  => 4 => null
+      // 1  => 2  => 3  => 4 => null
 
-//      Node<int>* it = myList->begin();
+      Node<int>* it = myList->begin();
 
-//      // 1  => 2  => 3  => 4 => null
-//      // ^
-//      Node<int>* itReturn = myList->erase(it);
+      // 1  => 2  => 3  => 4 => null
+      // ^
+      Node<int>* itReturn = myList->erase(it);
 
-//      // 2  => 3  => 4 => null
-//      // ^
-//      ASSERT_EQ(itReturn->data,2);
-
-
-//      it = it->next->next;
-
-//      // 2  => 3  => 4 => null
-//            // ^
-
-//      itReturn = myList->erase(it);
-
-//      // 2  => 4 => null
-//      // ^
-//      ASSERT_EQ(itReturn->data,2);
-
-//      it =myList->end();
-
-//      // 2  => 4 => null
-//            // ^
-
-//      itReturn = myList->erase(it);
-
-//      // 2  => null
-//      // ^
-//      ASSERT_EQ(itReturn->data,2);
+      // 2  => 3  => 4 => null
+      // ^
+      ASSERT_EQ(itReturn->data,2);
 
 
-//      // 2  => null
-//      // ^
+      it = it->next->next;
+
+      // 2  => 3  => 4 => null
+            // ^
+
+      itReturn = myList->erase(it);
+
+      // 2  => 4 => null
+      // ^
+      ASSERT_EQ(itReturn->data,4);
+
+      it =myList->end();
+
+      // 2  => 4 => null
+            // ^
+
+      itReturn = myList->erase(it);
+
+      // 2  => null
+      // ^
+      ASSERT_EQ(itReturn->data,2);
+
+
+      // 2  => null
+      // ^
 
 //      itReturn = myList->erase(itReturn);
 
 
 
-//      delete myList;
+      delete myList;
 
-//}
+}
 
 TEST(test10, test_remove)
 {
