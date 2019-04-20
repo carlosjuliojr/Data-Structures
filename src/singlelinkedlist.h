@@ -268,6 +268,14 @@ class SingleLinkedList {
               curr = curr->next;
               delete tem;
 
+            }else{
+
+              tem = this->tail;
+              this->tail = prev;
+              this->tail->next = nullptr;
+              this->size--;
+              curr = curr->next;
+              delete tem;
             }
           }else{
 
