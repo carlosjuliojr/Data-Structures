@@ -17,6 +17,7 @@ include_directories(../src)
 
 add_subdirectory(singleList)
 add_subdirectory(doublyList)
+add_subdirectory(stack)
 
 #Can manually add the sources using the set command as follows:
 set(SOURCES  main.cpp)

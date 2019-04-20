@@ -7,28 +7,21 @@
 # @date 15/10/2016
 ###############################################################################
 
+cmake_minimum_required(VERSION 3.5)
 
-cmake_minimum_required(VERSION 2.8.9)
-project(directory_test)
+set(PROJECT_NAME tester_stack)
 
-#Bring the headers, such as Student.h into the project
-#include_directories(../include)
+set(PROJECT_SRC
+    tester_stack.cpp
+    main.cpp
+    )
 
-set(library_sources
-   CMakeLists.txt
-   node.h
-   node2.h
-   stack.h
-   node2.cpp
-   stack.cpp
-   singlelinkedlist.h
-   node.cpp
-   singlelinkedlist.cpp
-   doublylinkedlist.h
-   doublylinkedlist.cpp
-  )
+add_executable(${PROJECT_NAME} ${PROJECT_SRC})
 
-add_library(datelib ${library_sources})
-#FILE(GLOB files "*.h")
+include_directories(
+    ../src
+    )
 
-#INSTALL(TARGETS ${datelib} DESTINATION lib)
+target_link_libraries(${PROJECT_NAME} gtest)
+
+
